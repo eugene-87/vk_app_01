@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Результаты поиска</h1>
+<p><a href="{{ url_for('index') }}">На главную</a></p>
+<table width="100%">
+{% for user in users %}
+  <tr>
+    <td><img src="{{ user.photo_100 }}"></td>
+    <td>
+      <p>{{ user.first_name }} {{ user.last_name }}</p>
+      {% if user.country %}<p>{{ user.country.title }},</p>{% endif %}
+      {% if user.city %}<p>{{ user.city.title }}</p>{% endif %}
+    </td>
+    <td>{% if user.career and user.career[0].company %}
+          {{ user.career[0].company }}
+        {% elif user.universities %}
+          {{ user.universities[0].name }}
+        {% elif user.schools %}
+          {{ user.schools[0].name }}
+        {% endif %}
+    </td>
+    <td><a href="#">Группы</a></td>
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

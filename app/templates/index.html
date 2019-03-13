@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>Форма поиска пользователей Вконтакте</h1>
+
+	<form action="{{ url_for('search') }}" method="post">
+			{{ form.hidden_tag() }}
+			<p>
+					{{ form.q.label }} <br>
+					{{ form.q(size=32) }}
+					{% for error in form.q.errors %}
+						<span style="color: red;">{{ error }}</span>
+					{% endfor %}
+			</p>
+			<p>
+					{{ form.country.label }} <br>
+					{{ form.country }}
+					{% for error in form.country.errors %}
+						<span style="color: red;">{{ error }}</span>
+					{% endfor %}
+			</p>
+			<p>
+					{{ form.sex.label }} <br>
+					{% for subfield in form.sex %}
+						{{ subfield }}
+						{{ subfield.label }}
+					{% endfor %}
+					{% for error in form.sex.errors %}
+						<span style="color: red;">{{ error }}</span>
+					{% endfor %}
+			</p>
+			<p>
+					{{ form.age_from.label }} <br>
+					{{ form.age_from }} - {{ form.age_to }}
+			</p>
+			<p>
+					{{ form.submit }}
+			</p>
+	</form>
+{% endblock %}
