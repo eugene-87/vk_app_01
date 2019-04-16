@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h3>Количество записей пользователя: {{ count_of_posts }}</h3>
+
+<table class="table table-hover">
+  <thead class="thead-light">
+    <th scope="col">id</th>
+    <th scope="col">title</th>
+    <th scope="col">text</th>
+  </thead>
+  <tbody>
+  {% for post in posts_of_user %}
+    <tr>
+      <td>{{ post.id }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.text }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

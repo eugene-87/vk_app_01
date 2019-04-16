@@ -11,3 +11,5 @@ class Config(object):
 
     DATABASE = os.environ.get('DATABASE') or \
         os.path.join(basedir, 'app.db')
+
+    USERS_PER_PAGE = 25

@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired
 
 
 class SearchForm(FlaskForm):
-    q = StringField('Имя, фамилия', validators=[DataRequired()])
+    q = StringField('Кого хотите найти', validators=[DataRequired()])
     country = SelectField('Страна', coerce=int, choices=[
         ('1', 'Россия')])
     sex = RadioField('Пол', coerce=int, default='0', choices=[

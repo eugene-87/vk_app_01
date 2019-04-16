@@ -2,28 +2,57 @@
 
 {% block content %}
 
-<h1>Результаты поиска</h1>
-<p><a href="{{ url_for('index') }}">На главную</a></p>
-<table width="100%">
-{% for user in users %}
-  <tr>
-    <td><img src="{{ user.photo_100 }}"></td>
-    <td>
-      <p>{{ user.first_name }} {{ user.last_name }}</p>
-      {% if user.country %}<p>{{ user.country.title }},</p>{% endif %}
-      {% if user.city %}<p>{{ user.city.title }}</p>{% endif %}
-    </td>
-    <td>{% if user.career and user.career[0].company %}
-          {{ user.career[0].company }}
-        {% elif user.universities %}
-          {{ user.universities[0].name }}
-        {% elif user.schools %}
-          {{ user.schools[0].name }}
-        {% endif %}
-    </td>
-    <td><a href="#">Группы</a></td>
-  </tr>
-{% endfor %}
-</table>
+<div class="col">
+  <h1>Результаты поиска</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <th scope="col">#</th>
+        <th scope="col">Фото</th>
+        <th scope="col">Имя (фамилия) пользователя</th>
+        <th scope="col">Дата рождения (возраст)</th>
+        <th scope="col">Страна</th>
+        <th scope="col">Город</th>
+        <th scope="col">Школа</th>
+        <th scope="col">Профессиональное учебное заведение</th>
+        <th scope="col">Работа</th>
+        <th scope="col">Ссылка на профиль</th>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ users.index(user)+1 }}</td>
+          <td><img src="{{ user.photo_100 }}"></td>
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+          <td>{% if user.bdate %}{{ user.bdate }}{% else%}---{% endif %}</td>
+          <td>{% if user.country %}{{ user.country.title }}{% else%}---{% endif %}</td>
+          <td>{% if user.city %}{{ user.city.title }}{% else%}---{% endif %}</td>
+          <td>{% if user.schools %}{{ user.schools[0].name }}{% else%}---{% endif %}</td>
+          <td>{% if user.universities %}{{ user.universities[0].name }}{% else%}---{% endif %}</td>
+          <td>{% if user.career and user.career[0].company %}{{ user.career[0].company }}{% else%}---{% endif %}</td>
+          <td><a href="{{ url_for('user', user_id=user.id) }}">Группы</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="Search result page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a href="#" class="page-link" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a href="#" class="page-link">1</a></li>
+      <li class="page-item"><a href="#" class="page-link">2</a></li>
+      <li class="page-item"><a href="#" class="page-link">99</a></li>
+      <li class="page-item">
+        <a href="#" class="page-link" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 
 {% endblock %}

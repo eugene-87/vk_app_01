@@ -1,40 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="col-6">
 	<h1>Форма поиска пользователей Вконтакте</h1>
-
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet similique deleniti culpa laborum perferendis optio magni voluptatem. Repudiandae, quidem voluptate vero numquam in eligendi aperiam magni repellendus eveniet aliquid nulla perspiciatis nesciunt fuga ipsa rerum nostrum a, officia ducimus. Odit quis maiores veniam, fugit harum optio nobis, adipisci nulla architecto illo quas facilis necessitatibus doloremque perferendis velit, voluptatum at quidem error veritatis dicta animi saepe! Repellat expedita cumque repudiandae eum itaque tempora vero quae voluptas optio harum nisi nesciunt cupiditate obcaecati inventore, voluptatibus quaerat soluta et ratione unde ut. Inventore dolores odit saepe perspiciatis sint. Vero neque id totam eaque.</p>
+</div>
+<div class="col-6">
 	<form action="{{ url_for('search') }}" method="post">
+		<div class="form-group">
 			{{ form.hidden_tag() }}
-			<p>
-					{{ form.q.label }} <br>
-					{{ form.q(size=32) }}
-					{% for error in form.q.errors %}
-						<span style="color: red;">{{ error }}</span>
-					{% endfor %}
-			</p>
-			<p>
-					{{ form.country.label }} <br>
-					{{ form.country }}
-					{% for error in form.country.errors %}
-						<span style="color: red;">{{ error }}</span>
-					{% endfor %}
-			</p>
-			<p>
-					{{ form.sex.label }} <br>
-					{% for subfield in form.sex %}
-						{{ subfield }}
-						{{ subfield.label }}
-					{% endfor %}
-					{% for error in form.sex.errors %}
-						<span style="color: red;">{{ error }}</span>
-					{% endfor %}
-			</p>
-			<p>
-					{{ form.age_from.label }} <br>
-					{{ form.age_from }} - {{ form.age_to }}
-			</p>
-			<p>
-					{{ form.submit }}
-			</p>
+			{{ form.q.label }}
+			{{ form.q(size=32, class='form-control', placeholder='имя и фамилия..') }}
+			{% for error in form.q.errors %}
+				<span style="color: red;">{{ error }}</span>
+			{% endfor %}
+		</div>
+		<div class="form-group">
+			{{ form.country.label }}
+			{{ form.country(class='form-control') }}
+			{% for error in form.country.errors %}
+				<span style="color: red;">{{ error }}</span>
+			{% endfor %}
+		</div>
+		<div class="form-row">
+			<div class="form-group col-3">
+				{{ form.sex.label(class='form-check-label') }}
+				{% for subfield in form.sex %}
+					<div class="form-check">
+						{{ subfield(class='form-check-input') }}
+						{{ subfield.label(class='form-check-label') }}
+					</div>
+				{% endfor %}
+				{% for error in form.sex.errors %}
+					<span style="color: red;">{{ error }}</span>
+				{% endfor %}
+			</div>
+
+				<div class="form-group col-2">
+					{{ form.age_from.label(class='form-control-label') }}
+				</div>
+				<div class="form-group col-3">
+					{{ form.age_from(class='form-control form-control-inline') }}
+				</div>
+				<div class="form-group col-3">
+					{{ form.age_to(class='form-control form-control-inline') }}
+				</div>
+		</div>
+	<button class="btn btn-primary" type="submit">Найти</button>
 	</form>
+</div>
 {% endblock %}
